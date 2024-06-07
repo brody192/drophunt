@@ -1,6 +1,6 @@
 import { Hono } from "hono"
 import { ronin, type Bindings, type Variables } from "hono-ronin"
-import "@ronin/drophunt"
+// import "@ronin/drophunt"
 
 const app = new Hono<{
 	Bindings: Bindings
