@@ -22,8 +22,8 @@ export function IndexPage() {
 	const { isPending, error, data, isFetching } = useQuery({
 		queryKey: ["data"],
 		queryFn: () =>
-			// fetch("https://nikiv-drophunt.web.val.run").then((res) => res.json()),
-			fetch("https://drophunt.nikiv.workers.dev").then((res) => res.json()),
+			fetch("https://nikiv-drophunt.web.val.run").then((res) => res.json()),
+		// fetch("https://drophunt.nikiv.workers.dev").then((res) => res.json()),
 	})
 	console.log(data, "data")
 
