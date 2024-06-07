@@ -1,0 +1,11 @@
+{
+  "name": "drophunt",
+  "private": true,
+  "prettier": {
+    "semi": false,
+    "useTabs": true
+  },
+  "dependencies": {
+    "hono-ronin": "^1.0.3"
+  }
+}

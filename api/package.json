@@ -1,0 +1,16 @@
+{
+	"scripts": {
+		"dev": "wrangler dev src/index.ts",
+		"deploy": "wrangler deploy --minify src/index.ts"
+	},
+	"dependencies": {
+		"hono": "^4.4.4",
+		"hono-ronin": "^1.0.4",
+		"ronin": "^3.3.5"
+	},
+	"devDependencies": {
+		"@cloudflare/workers-types": "^4.20240605.0",
+		"@ronin/drophunt": "^0.0.0-3435257180651",
+		"wrangler": "^3.60.0"
+	}
+}
