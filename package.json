@@ -1,11 +1,15 @@
 {
-  "name": "drophunt",
-  "private": true,
-  "prettier": {
-    "semi": false,
-    "useTabs": true
-  },
-  "dependencies": {
-    "hono-ronin": "^1.0.3"
-  }
+	"name": "drophunt",
+	"private": true,
+	"prettier": {
+		"semi": false,
+		"useTabs": true
+	},
+	"workspaces": [
+		"api",
+		"app"
+	],
+	"dependencies": {
+		"hono-ronin": "^1.0.3"
+	}
 }
