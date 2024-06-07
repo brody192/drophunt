@@ -20,6 +20,7 @@ app.get("/", async (c) => {
 	airdrops.map((airdrop) => {
 		console.log(airdrop.name)
 	})
+	return c.json({ airdrops, ads, global })
 })
 
 // export type homeGetReturn = typeof
