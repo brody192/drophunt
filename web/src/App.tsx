@@ -2,12 +2,13 @@ import { useQuery } from "@tanstack/react-query"
 import { hc } from "hono/client"
 import { proxy } from "valtio"
 import { useProxy } from "valtio/utils"
+import type { AppType } from "../../api/src/api"
 
 export const GlobalState = proxy({
 	activePage: "Airdrops" as "Airdrops" | "Claim" | "Earn",
 	activeFilters: [],
 })
-// const client = hc<AppType>("https://drophunt.nikiv.workers.dev")
+const client = hc<AppType>("https://drophunt.nikiv.workers.dev")
 
 export function HomeRoute() {
 	const local = useProxy(GlobalState)
