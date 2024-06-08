@@ -14,34 +14,10 @@ import { Airdrop } from "@ronin/drophunt"
 export const GlobalState = proxy({
 	activePage: "Airdrops" as "Airdrops" | "Claim" | "Earn",
 	activeFilters: [],
-	openedAirdrop: null,
+	openedAirdrop: null as Airdrop | null,
 	openFilterMenu: false,
-})
-
-export function IndexPage() {
-	const local = useProxy(GlobalState)
-	const { isPending, error, data, isFetching } = useQuery({
-		queryKey: ["data"],
-		queryFn: () =>
-			fetch("https://drophunt.nikiv.workers.dev").then((res) => res.json()),
-	})
-	console.log(data, "data")
-
-	const utils = useUtils()
-	// local state
-	const [activePage, setActivePage] = useState<"Airdrops" | "Claim" | "Earn">(
-		"Airdrops"
-	)
-	const [activeFilters, setActiveFilters] = useState([])
-	const [openedAirdrop, setOpenedAirdrop] = useState<Airdrop | null>(null)
-	const [openFilterMenu, setOpenFilterMenu] = useState(false)
-	const [availableFilterOptions] = useState([
-		"The Open Network",
-		"Solana",
-		"Polygon",
-		"Ethereum",
-	])
-	const [blockchainLogos] = useState({
+	availableFilterOptions: ["The Open Network", "Solana", "Polygon", "Ethereum"],
+	blockchainLogos: {
 		Solana:
 			"https://storage.ronin.co/spa_ytxzy7a722jx52um/7cc8408f-0eb4-4d78-9747-ffc2408a0230",
 		"The Open Network":
@@ -50,9 +26,28 @@ export function IndexPage() {
 			"https://storage.ronin.co/spa_ytxzy7a722jx52um/e640d8e8-52ab-4a74-8f59-387e5c00724c",
 		Ethereum:
 			"https://storage.ronin.co/spa_ytxzy7a722jx52um/05911aa3-9777-49a2-8c76-0189d8ef91fc",
-	})
+	},
+})
 
-	if (error) return <div>Error has occurred. {JSON.stringify(error)}</div>
+export function IndexPage() {
+	const local = useProxy(GlobalState)
+	const utils = useUtils()
+
+	const { isPending, error, data, isFetching } = useQuery({
+		queryKey: ["data"],
+		queryFn: () =>
+			// TODO: swap local & prod (for local add `local` field to ronin objects)
+			fetch("https://drophunt.nikiv.workers.dev").then((res) => res.json()),
+	})
+	console.log(data, "data")
+
+	if (error)
+		return (
+			<div className="text-white">
+				Error has occurred. {JSON.stringify(error)}
+			</div>
+		)
+	// TODO: add loader in middle of screen
 	if (isFetching) return <div></div>
 	if (data) {
 		return (
@@ -61,37 +56,43 @@ export function IndexPage() {
 					<div className="py-[34px] px-[15px] text-white text-[14px] flex flex-col gap-[22px]">
 						<div className="flex justify-between items-center">
 							{/* if no airdrop is open, then show nav bar */}
-							{openedAirdrop === null ? (
+							{local.openedAirdrop === null ? (
 								<div className="flex bg-[#191919] text-[12px] rounded-full h-[33px] items-center font-light">
 									<div
 										onClick={() => {
-											setActivePage("Airdrops")
+											local.activePage = "Airdrops"
 										}}
-										style={activePage === "Airdrops" ? { fontWeight: 600 } : {}}
+										style={
+											local.activePage === "Airdrops" ? { fontWeight: 600 } : {}
+										}
 										className={`p-2 px-4 h-full flex cursor-pointer items-center justify-center rounded-full ${
-											activePage === "Airdrops" ? "bg-[#2E2E2E]" : ""
+											local.activePage === "Airdrops" ? "bg-[#2E2E2E]" : ""
 										}`}
 									>
 										Airdrops
 									</div>
 									<div
 										onClick={() => {
-											setActivePage("Claim")
+											local.activePage = "Claim"
 										}}
-										style={activePage === "Claim" ? { fontWeight: 600 } : {}}
+										style={
+											local.activePage === "Claim" ? { fontWeight: 600 } : {}
+										}
 										className={`p-2 px-4 h-full flex cursor-pointer items-center justify-center rounded-full ${
-											activePage === "Claim" ? "bg-[#2E2E2E]" : ""
+											local.activePage === "Claim" ? "bg-[#2E2E2E]" : ""
 										}`}
 									>
 										Claim
 									</div>
 									<div
 										onClick={() => {
-											setActivePage("Earn")
+											local.activePage = "Earn"
 										}}
-										style={activePage === "Earn" ? { fontWeight: 600 } : {}}
+										style={
+											local.activePage === "Earn" ? { fontWeight: 600 } : {}
+										}
 										className={`p-2 px-4 h-full cursor-pointer flex items-center justify-center rounded-full ${
-											activePage === "Earn" ? "bg-[#2E2E2E]" : ""
+											local.activePage === "Earn" ? "bg-[#2E2E2E]" : ""
 										}`}
 									>
 										Earn
@@ -100,7 +101,7 @@ export function IndexPage() {
 							) : (
 								<div
 									onClick={() => {
-										setOpenedAirdrop(null)
+										local.openedAirdrop = null
 									}}
 									className="cursor-pointer hover:scale-[1.1] transition-all"
 								>
@@ -120,11 +121,11 @@ export function IndexPage() {
 							/>
 						</div>
 						{(() => {
-							switch (activePage) {
+							switch (local.activePage) {
 								case "Airdrops":
 									return (
 										<>
-											{openedAirdrop !== null && (
+											{local.openedAirdrop !== null && (
 												<>
 													{/* opened airdrop content */}
 													<div className="flex flex-col justify-between items-center w-full gap-[22px]">
@@ -140,28 +141,28 @@ export function IndexPage() {
 																)}
 																<div className="flex flex-col">
 																	<div className="text-[22px] font-bold">
-																		{openedAirdrop.name}
+																		{local.openedAirdrop.name}
 																	</div>
 																	<div className="flex gap-2 items-center">
 																		<div className="bg-[#189A4C] px-3 p-1 rounded-full">
-																			{openedAirdrop.active && "Active"}
+																			{local.openedAirdrop.active && "Active"}
 																		</div>
 																		<div className="border rounded-full border-[#3A3A3A] px-3 p-1">
-																			{openedAirdrop.blockchain}
+																			{local.openedAirdrop.blockchain}
 																		</div>
 																	</div>
 																</div>
 															</div>
 															<div className="bg-[#232323] w-full p-4">
 																<div className="text-sm text-white/70 font-light">
-																	{openedAirdrop.description}
+																	{local.openedAirdrop.description}
 																</div>
 															</div>
 															<div className="bg-[#191919] w-full p-4">
 																<div className="font-bold text-[20px]">
 																	Conditions
 																</div>
-																{openedAirdrop.conditions
+																{local.openedAirdrop.conditions
 																	.split("\n")
 																	.map((condition, index) => {
 																		return (
@@ -189,21 +190,27 @@ export function IndexPage() {
 																hours */}
 															</div>
 														</div>
-														<button
-															className="bg-[#23C463] rounded-full w-full p-4 text-[18px] mt-[20px]"
-															onClick={() => {
-																// utils.openTelegramLink(
-																// 	"https://t.me/pepetondrop_bot"
-																// )
-																utils.openTelegramLink(openedAirdrop.actionUrl)
-															}}
-														>
-															Action
-														</button>
+														{local.openedAirdrop.actionUrl && (
+															<button
+																className="bg-[#23C463] rounded-full w-full p-4 text-[18px] mt-[20px]"
+																onClick={() => {
+																	// utils.openTelegramLink(
+																	// 	"https://t.me/pepetondrop_bot"
+																	// )
+																	utils.openTelegramLink(
+																		// TODO: not sure why ts breaks
+																		// @ts-ignore
+																		local.openedAirdrop.actionUrl
+																	)
+																}}
+															>
+																Action
+															</button>
+														)}
 													</div>
 												</>
 											)}
-											{openedAirdrop === null && (
+											{local.openedAirdrop === null && (
 												<div className="flex flex-col gap-[12px]">
 													<div
 														className="font-bold text-[18px]"
@@ -215,25 +222,25 @@ export function IndexPage() {
 													</div>
 													<div className="flex items-center justify-between">
 														<>
-															{openFilterMenu ? (
+															{local.openFilterMenu ? (
 																<div
 																	onClick={() => {
-																		setOpenFilterMenu(false)
+																		local.openFilterMenu = false
 																	}}
 																	className="fixed top-0 left-0 w-screen h-screen bg-black/80"
 																></div>
 															) : null}
 															<button
 																onClick={() => {
-																	setOpenFilterMenu(!openFilterMenu)
+																	local.openFilterMenu = !local.openFilterMenu
 																}}
 																className="flex gap-2 items-center justify-center border rounded-full border-[#3A3A3A] py-[10px] px-[14px] relative"
 															>
-																{activeFilters.length === 0 && (
+																{local.activeFilters.length === 0 && (
 																	<div className="bg-[#189A4C] rounded-full h-[16px] w-[16px]"></div>
 																)}
-																{activeFilters.length > 0 &&
-																	activeFilters.map((filter, index) => {
+																{local.activeFilters.length > 0 &&
+																	local.activeFilters.map((filter, index) => {
 																		return (
 																			<img
 																				key={index}
@@ -247,12 +254,12 @@ export function IndexPage() {
 																		)
 																	})}
 
-																{activeFilters.length === 0
+																{local.activeFilters.length === 0
 																	? "All"
-																	: activeFilters[0]}
-																{activeFilters.length > 1 && ", ..."}
+																	: local.activeFilters[0]}
+																{local.activeFilters.length > 1 && ", ..."}
 																<Icons name="ArrowDown" size={[20, 20]} />
-																{openFilterMenu ? (
+																{local.openFilterMenu ? (
 																	<div
 																		onClick={(e) => {
 																			onClickWithoutBubblingToTheParentOnClicks(
@@ -264,20 +271,20 @@ export function IndexPage() {
 																		<div className="flex flex-col gap-1">
 																			<div
 																				onClick={() => {
-																					setActiveFilters([])
+																					local.activeFilters = []
 																				}}
 																				className="w-full flex items-center justify-between hover:bg-neutral-800 rounded-md px-4 p-2"
 																			>
 																				All
 																				<div
 																					className={`w-[16px] h-[16px] flex items-center justify-center rounded-[1px] ${
-																						activeFilters.length === 0
+																						local.activeFilters.length === 0
 																							? "bg-green-500"
 																							: "bg-white"
 																					}`}
 																				></div>
 																			</div>
-																			{availableFilterOptions.map(
+																			{local.availableFilterOptions.map(
 																				(filterOption, index) => {
 																					return (
 																						<div
@@ -298,27 +305,26 @@ export function IndexPage() {
 																								key={index}
 																								onClick={() => {
 																									if (
-																										activeFilters.includes(
+																										local.activeFilters.includes(
 																											// @ts-ignore
 																											filterOption
 																										)
 																									) {
-																										setActiveFilters(
-																											activeFilters.filter(
+																										local.activeFilters =
+																											local.activeFilters.filter(
 																												(f) => {
 																													return (
 																														f !== filterOption
 																													)
 																												}
 																											)
-																										)
 																									} else {
-																										setActiveFilters([
+																										local.activeFilters = [
 																											// @ts-ignore
 																											...activeFilters,
 																											// @ts-ignore
 																											filterOption,
-																										])
+																										]
 																									}
 																								}}
 																								className="w-full flex items-center justify-between hover:bg-neutral-800 rounded-md px-4 p-2"
@@ -326,7 +332,7 @@ export function IndexPage() {
 																								{filterOption}
 																								<div
 																									className={`w-[16px] h-[16px] flex items-center justify-center rounded-[1px] ${
-																										activeFilters.includes(
+																										local.activeFilters.includes(
 																											// @ts-ignore
 																											filterOption
 																										)
@@ -353,7 +359,7 @@ export function IndexPage() {
 																			<button
 																				className="bg-[#189a4c] rounded-full px-6 p-[6px]"
 																				onClick={() => {
-																					setOpenFilterMenu(false)
+																					local.openFilterMenu = false
 																				}}
 																			>
 																				Confirm
@@ -373,7 +379,7 @@ export function IndexPage() {
 														{data.airdrops.map((airdrop, index) => {
 															if (airdrop.active === false) return
 															if (
-																activeFilters.length > 0 &&
+																local.activeFilters.length > 0 &&
 																// @ts-ignore
 																!activeFilters.includes(airdrop.blockchain)
 															) {
@@ -382,7 +388,7 @@ export function IndexPage() {
 															return (
 																<div
 																	onClick={() => {
-																		setOpenedAirdrop(airdrop)
+																		local.openedAirdrop = airdrop
 																	}}
 																	key={index}
 																	className="w-full cursor-pointer flex flex-col gap-3 bg-[#191919] p-[12px] pr-[14px] rounded-[20px]"
