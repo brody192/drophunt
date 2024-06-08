@@ -1,6 +1,6 @@
 import Icons from "@/components/Icons"
 import { Airdrop } from "@ronin/drophunt"
-import { QueryClient, useQuery } from "@tanstack/react-query"
+import { useQuery } from "@tanstack/react-query"
 import { useUtils } from "@tma.js/sdk-react"
 import { TonConnectButton } from "@tonconnect/ui-react"
 import { hc } from "hono/client"
@@ -33,12 +33,6 @@ export function IndexPage() {
 	const local = useProxy(GlobalState)
 	const utils = useUtils()
 
-	// const { isPending, error, data, isFetching } = useQuery({
-	// 	queryKey: ["data"],
-	// 	queryFn: () =>
-	// 		// TODO: swap local & prod (for local add `local` field to ronin objects)
-	// 		fetch("https://drophunt.nikiv.workers.dev").then((res) => res.json()),
-	// })
 	const { isPending, error, data, isFetching } = useQuery({
 		queryKey: ["global"],
 		queryFn: async () => {
@@ -459,3 +453,4 @@ export function IndexPage() {
 		)
 	}
 }
+// TODO: swap local & prod (for local add `local` field to ronin objects)
