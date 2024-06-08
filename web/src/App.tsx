@@ -8,7 +8,8 @@ export const GlobalState = proxy({
 	activePage: "Airdrops" as "Airdrops" | "Claim" | "Earn",
 	activeFilters: [],
 })
-const client = hc<AppType>("https://drophunt.nikiv.workers.dev")
+// const client = hc<AppType>("https://drophunt.nikiv.workers.dev")
+const client = hc<AppType>("http://localhost:8787")
 
 export function HomeRoute() {
 	const local = useProxy(GlobalState)
@@ -22,13 +23,11 @@ export function HomeRoute() {
 	})
 	console.log(data, "data")
 	console.log(error, "error")
-	return <>{local.activePage}</>
-
-	// if (error)
-	// 	return <div className="text-white">Error: {JSON.stringify(error)}</div>
-	// // TODO: add loader in middle of screen
-	// if (isFetching) return <div></div>
-	// if (data) {
-	// 	return <>ronin test</>
-	// }
+	if (error)
+		return <div className="text-white">Error: {JSON.stringify(error)}</div>
+	// TODO: add loader in middle of screen
+	if (isFetching) return <div></div>
+	if (data) {
+		return <>{JSON.stringify(data)}</>
+	}
 }
