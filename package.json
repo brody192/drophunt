@@ -1,5 +1,12 @@
 {
 	"name": "drophunt",
+	"scripts": {
+		"dev": "cd web && bun dev",
+		"web": "cd web && bun dev",
+		"app": "cd app && bun dev",
+		"api": "cd api && bun dev",
+		"api:deploy": "cd api && bun run deploy"
+	},
 	"private": true,
 	"prettier": {
 		"semi": false,
