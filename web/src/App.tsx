@@ -23,6 +23,7 @@ export function HomeRoute() {
 	})
 	console.log(data, "data")
 	console.log(error, "error")
+
 	if (error)
 		return <div className="text-white">Error: {JSON.stringify(error)}</div>
 	if (isFetching) return <div></div>
