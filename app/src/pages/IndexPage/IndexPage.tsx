@@ -27,7 +27,8 @@ export const GlobalState = proxy({
 			"https://storage.ronin.co/spa_ytxzy7a722jx52um/05911aa3-9777-49a2-8c76-0189d8ef91fc",
 	},
 })
-const client = hc<AppType>("/")
+// const client = hc<AppType>("/")
+const client = hc<AppType>("https://drophunt.nikiv.workers.dev")
 
 export function IndexPage() {
 	const local = useProxy(GlobalState)
