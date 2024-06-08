@@ -1,15 +1,14 @@
 import Icons from "@/components/Icons"
-import { useQuery } from "@tanstack/react-query"
+import { Airdrop } from "@ronin/drophunt"
+import { QueryClient, useQuery } from "@tanstack/react-query"
 import { useUtils } from "@tma.js/sdk-react"
 import { TonConnectButton } from "@tonconnect/ui-react"
-import { useState } from "react"
+import { hc } from "hono/client"
 import { proxy } from "valtio"
 import { useProxy } from "valtio/utils"
+import { AppType } from "../../../../api/src/index"
 import { onClickWithoutBubblingToTheParentOnClicks } from "../../../lib/utils"
 import "./IndexPage.css"
-import { Airdrop } from "@ronin/drophunt"
-// import { AppType } from '.'
-// import { hc } from 'hono/client'
 
 export const GlobalState = proxy({
 	activePage: "Airdrops" as "Airdrops" | "Claim" | "Earn",
@@ -28,16 +27,25 @@ export const GlobalState = proxy({
 			"https://storage.ronin.co/spa_ytxzy7a722jx52um/05911aa3-9777-49a2-8c76-0189d8ef91fc",
 	},
 })
+const queryClient = new QueryClient()
+const client = hc<AppType>("/")
 
 export function IndexPage() {
 	const local = useProxy(GlobalState)
 	const utils = useUtils()
 
+	// const { isPending, error, data, isFetching } = useQuery({
+	// 	queryKey: ["data"],
+	// 	queryFn: () =>
+	// 		// TODO: swap local & prod (for local add `local` field to ronin objects)
+	// 		fetch("https://drophunt.nikiv.workers.dev").then((res) => res.json()),
+	// })
 	const { isPending, error, data, isFetching } = useQuery({
-		queryKey: ["data"],
-		queryFn: () =>
-			// TODO: swap local & prod (for local add `local` field to ronin objects)
-			fetch("https://drophunt.nikiv.workers.dev").then((res) => res.json()),
+		queryKey: ["your-key-here"],
+		queryFn: async () => {
+			const response = await client.index.$get()
+			return await response.json() // { airdrops: [], ads: [], global: [] }
+		},
 	})
 	console.log(data, "data")
 
