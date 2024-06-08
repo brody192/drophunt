@@ -14,14 +14,15 @@ export function HomeRoute() {
 	const local = useProxy(GlobalState)
 	return <>{local.activePage}</>
 
-	// const { isPending, error, data, isFetching } = useQuery({
-	// 	queryKey: ["global"],
-	// 	queryFn: async () => {
-	// 		const response = await client.index.$get()
-	// 		return await response.json()
-	// 	},
-	// })
-	// console.log(data, "data")
+	const { isPending, error, data, isFetching } = useQuery({
+		queryKey: ["global"],
+		queryFn: async () => {
+			const response = await client.index.$get()
+			return await response.json()
+		},
+	})
+	console.log(data, "data")
+	console.log(error, "error")
 
 	// if (error)
 	// 	return <div className="text-white">Error: {JSON.stringify(error)}</div>
