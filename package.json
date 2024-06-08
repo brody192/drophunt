@@ -8,8 +8,5 @@
 	"workspaces": [
 		"api",
 		"app"
-	],
-	"dependencies": {
-		"hono-ronin": "^1.0.3"
-	}
+	]
 }
