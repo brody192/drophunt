@@ -34,7 +34,7 @@ export function IndexPage() {
 	const local = useProxy(GlobalState)
 	const utils = useUtils()
 
-	const { isPending, error, data, isFetching } = useQuery({
+	const { error, data, isFetching } = useQuery({
 		queryKey: ["global"],
 		queryFn: async () => {
 			const response = await client.index.$get()
