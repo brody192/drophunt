@@ -8,8 +8,8 @@ export const GlobalState = proxy({
 	activePage: "Airdrops" as "Airdrops" | "Claim" | "Earn",
 	activeFilters: [],
 })
-// const client = hc<AppType>("https://drophunt.nikiv.workers.dev")
-const client = hc<AppType>("http://localhost:8787")
+const client = hc<AppType>("https://drophunt.nikiv.workers.dev")
+// const client = hc<AppType>("http://localhost:8787")
 
 export function HomeRoute() {
 	const local = useProxy(GlobalState)

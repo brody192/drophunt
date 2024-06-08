@@ -6,7 +6,7 @@ import { TonConnectButton } from "@tonconnect/ui-react"
 import { hc } from "hono/client"
 import { proxy } from "valtio"
 import { useProxy } from "valtio/utils"
-import { AppType } from "../../../../api/src/index"
+import { AppType } from "../../../../api/src/api"
 import { onClickWithoutBubblingToTheParentOnClicks } from "../../../lib/utils"
 import "./IndexPage.css"
 
