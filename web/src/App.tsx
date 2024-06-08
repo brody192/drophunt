@@ -11,6 +11,7 @@ import { AppType } from "../../api/src/api"
 // const client = hc<AppType>("http://localhost:8787")
 const client = hc<AppType>("https://drophunt.nikiv.workers.dev")
 
+// ..
 export function HomeRoute() {
 	// const local = useProxy(GlobalState)
 
