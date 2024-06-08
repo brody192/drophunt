@@ -25,7 +25,6 @@ export function HomeRoute() {
 	console.log(error, "error")
 	if (error)
 		return <div className="text-white">Error: {JSON.stringify(error)}</div>
-	// TODO: add loader in middle of screen
 	if (isFetching) return <div></div>
 	if (data) {
 		return <>{JSON.stringify(data)}</>
