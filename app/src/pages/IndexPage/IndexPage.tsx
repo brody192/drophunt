@@ -27,7 +27,6 @@ export const GlobalState = proxy({
 			"https://storage.ronin.co/spa_ytxzy7a722jx52um/05911aa3-9777-49a2-8c76-0189d8ef91fc",
 	},
 })
-const queryClient = new QueryClient()
 const client = hc<AppType>("/")
 
 export function IndexPage() {
@@ -41,10 +40,10 @@ export function IndexPage() {
 	// 		fetch("https://drophunt.nikiv.workers.dev").then((res) => res.json()),
 	// })
 	const { isPending, error, data, isFetching } = useQuery({
-		queryKey: ["your-key-here"],
+		queryKey: ["global"],
 		queryFn: async () => {
 			const response = await client.index.$get()
-			return await response.json() // { airdrops: [], ads: [], global: [] }
+			return await response.json()
 		},
 	})
 	console.log(data, "data")
