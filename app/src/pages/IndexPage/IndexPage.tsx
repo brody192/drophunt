@@ -386,7 +386,7 @@ export function IndexPage() {
 															return (
 																<div
 																	onClick={() => {
-																		local.openedAirdrop = airdrop
+																		// local.openedAirdrop = airdrop
 																	}}
 																	key={index}
 																	className="w-full cursor-pointer flex flex-col gap-3 bg-[#191919] p-[12px] pr-[14px] rounded-[20px]"
