@@ -6,9 +6,7 @@ const app = new Hono<{
 	Variables: Variables
 }>()
 
-app.use("*", ronin())
-
-app.get("/", async (c) => {
+app.use("*", ronin()).get("/", async (c) => {
 	const { get } = c.var.ronin
 	const [airdrops, ads, global] = await Promise.all([
 		get.airdrops(),
