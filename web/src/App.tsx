@@ -2,7 +2,6 @@ import { useQuery } from "@tanstack/react-query"
 import { hc } from "hono/client"
 import { proxy } from "valtio"
 import { useProxy } from "valtio/utils"
-import "./IndexPage.css"
 
 export const GlobalState = proxy({
 	activePage: "Airdrops" as "Airdrops" | "Claim" | "Earn",
@@ -12,7 +11,7 @@ export const GlobalState = proxy({
 
 export function HomeRoute() {
 	const local = useProxy(GlobalState)
-	return <>ronin test</>
+	return <>{local.activePage}</>
 
 	// const { isPending, error, data, isFetching } = useQuery({
 	// 	queryKey: ["global"],
