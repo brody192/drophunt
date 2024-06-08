@@ -12,7 +12,6 @@ const client = hc<AppType>("https://drophunt.nikiv.workers.dev")
 
 export function HomeRoute() {
 	const local = useProxy(GlobalState)
-	return <>{local.activePage}</>
 
 	const { isPending, error, data, isFetching } = useQuery({
 		queryKey: ["global"],
@@ -23,6 +22,7 @@ export function HomeRoute() {
 	})
 	console.log(data, "data")
 	console.log(error, "error")
+	return <>{local.activePage}</>
 
 	// if (error)
 	// 	return <div className="text-white">Error: {JSON.stringify(error)}</div>
