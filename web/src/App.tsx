@@ -1,20 +1,20 @@
 import { useQuery } from "@tanstack/react-query"
 import { hc } from "hono/client"
-import { proxy } from "valtio"
-import { useProxy } from "valtio/utils"
-import type { AppType } from "../../api/src/api"
+// import { proxy } from "valtio"
+// import { useProxy } from "valtio/utils"
+import { AppType } from "../../api/src/api"
 
-export const GlobalState = proxy({
-	activePage: "Airdrops" as "Airdrops" | "Claim" | "Earn",
-	activeFilters: [],
-})
-const client = hc<AppType>("https://drophunt.nikiv.workers.dev")
+// export const GlobalState = proxy({
+// 	activePage: "Airdrops" as "Airdrops" | "Claim" | "Earn",
+// 	activeFilters: [],
+// })
 // const client = hc<AppType>("http://localhost:8787")
+const client = hc<AppType>("https://drophunt.nikiv.workers.dev")
 
 export function HomeRoute() {
-	const local = useProxy(GlobalState)
+	// const local = useProxy(GlobalState)
 
-	const { isPending, error, data, isFetching } = useQuery({
+	const { error, data, isFetching } = useQuery({
 		queryKey: ["global"],
 		queryFn: async () => {
 			const response = await client.index.$get()
