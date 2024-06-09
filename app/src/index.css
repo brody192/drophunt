@@ -5,14 +5,11 @@
 body {
 	background: black;
 	color: white;
-}
 
-body {
   font-family: 'Inter Variable', sans-serif;
 	overflow-y: scroll;
   scrollbar-width: none;
 }
-
 
 body::-webkit-scrollbar {
   display: none;
