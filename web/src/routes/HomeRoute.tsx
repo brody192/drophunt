@@ -25,7 +25,7 @@ export default function HomeRoute() {
 		queryFn: async () => {
 			// TODO: ideally the return is typed using https://hono.dev/guides/rpc but its breaking due to bun workspaces or something else
 			const apiUrl = import.meta.env.DEV
-				? "http://localhost:8910"
+				? "http://localhost:8787"
 				: "https://drophunt.nikiv.workers.dev"
 			const res = await fetch(apiUrl)
 			const resJson = await res.json()
