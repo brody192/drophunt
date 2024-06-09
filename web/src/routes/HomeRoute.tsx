@@ -23,13 +23,15 @@ export default function HomeRoute() {
 	const { error, data, isFetching } = useQuery({
 		queryKey: ["global"],
 		queryFn: async () => {
+			// TODO: ideally the return is typed using https://hono.dev/guides/rpc but its breaking due to bun workspaces
 			const res = await fetch("https://drophunt.nikiv.workers.dev")
 			const resJson = await res.json()
-			console.log(resJson, "res!!!")
+			// hardcoding return into valtio proxy
 			local.ads = resJson.ads
 			local.airdrops = resJson.airdrops
 			local.global = resJson.global
-			return "success"
+			// TODO: not sure how to best get data from react query response and put it into valtio proxy
+			return true
 		},
 	})
 	console.log(data, "data")
