@@ -59,10 +59,15 @@ export default function OpenedAirdropPage() {
 							{Array.from({ length: 15 }).map((_, index) => (
 								<div
 									key={index}
-									className="absolute w-[20px] h-[20px]"
+									className="absolute w-[18px] h-[18px]"
 									style={{
-										top: `${Math.floor(index / 5) * 30 + 10}%`, // Adjust vertical spacing
+										top: `${Math.floor(index / 5) * 31 + 9}%`, // Adjust vertical spacing
 										left: `${(index % 5) * 20 + 7}%`, // Adjust horizontal spacing
+										transform: `translateX(${
+											(index + 1) *
+											(Math.random() * 2.5) *
+											(Math.random() * 2.5)
+										}px) `,
 									}}
 								>
 									<Icons name="Pepe" />
