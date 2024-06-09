@@ -3,7 +3,6 @@ import { Airdrop } from "@ronin/drophunt"
 import { useQuery } from "@tanstack/react-query"
 import { useUtils } from "@tma.js/sdk-react"
 import { TonConnectButton } from "@tonconnect/ui-react"
-import { hc } from "hono/client"
 import { proxy } from "valtio"
 import { useProxy } from "valtio/utils"
 // import { AppType } from "../../../../api/src/api"
@@ -30,7 +29,7 @@ export const GlobalState = proxy({
 // const client = hc<AppType>("/")
 // const client = hc<AppType>("https://drophunt.nikiv.workers.dev")
 // ..
-const client = hc("https://drophunt.nikiv.workers.dev")
+// const client = hc("https://drophunt.nikiv.workers.dev")
 
 export function IndexPage() {
 	const local = useProxy(GlobalState)
@@ -39,8 +38,10 @@ export function IndexPage() {
 	const { error, data, isFetching } = useQuery({
 		queryKey: ["global"],
 		queryFn: async () => {
-			const response = await client.index.$get()
-			return await response.json()
+			// const response = await client.index.$get()
+			const res = await fetch("https://drophunt.nikiv.workers.dev")
+			console.log(res, "res")
+			return await res.json()
 		},
 	})
 	console.log(data, "data")

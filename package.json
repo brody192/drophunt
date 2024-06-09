@@ -7,14 +7,8 @@
 		"api": "cd api && bun dev",
 		"api:deploy": "cd api && bun run deploy"
 	},
-	"private": true,
 	"prettier": {
 		"semi": false,
 		"useTabs": true
-	},
-	"workspaces": [
-		"api",
-		"app",
-		"web"
-	]
+	}
 }
