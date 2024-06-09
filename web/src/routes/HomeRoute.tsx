@@ -23,10 +23,13 @@ export default function HomeRoute() {
 	const { error, data, isFetching } = useQuery({
 		queryKey: ["global"],
 		queryFn: async () => {
-			// TODO: ideally the return is typed using https://hono.dev/guides/rpc but its breaking due to bun workspaces
-			const res = await fetch("https://drophunt.nikiv.workers.dev")
+			// TODO: ideally the return is typed using https://hono.dev/guides/rpc but its breaking due to bun workspaces or something else
+			const apiUrl = import.meta.env.DEV
+				? "http://localhost:8910"
+				: "https://drophunt.nikiv.workers.dev"
+			const res = await fetch(apiUrl)
 			const resJson = await res.json()
-			// hardcoding return into valtio proxy
+			// hardcoding return into valtio proxy (ugly..)
 			local.ads = resJson.ads
 			local.airdrops = resJson.airdrops
 			local.global = resJson.global
