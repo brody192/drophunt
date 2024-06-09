@@ -29,6 +29,7 @@ export const GlobalState = proxy({
 })
 // const client = hc<AppType>("/")
 // const client = hc<AppType>("https://drophunt.nikiv.workers.dev")
+// ..
 const client = hc("https://drophunt.nikiv.workers.dev")
 
 export function IndexPage() {
