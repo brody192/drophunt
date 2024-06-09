@@ -1,5 +1,6 @@
 import { useProxy } from "valtio/utils"
 import { HomeRouteState } from "../routes/HomeRoute"
+import Icons from "./Icons"
 
 export default function OpenedAirdropPage() {
 	const local = useProxy(HomeRouteState)
@@ -54,17 +55,31 @@ export default function OpenedAirdropPage() {
 									})}
 							</div>
 						</div>
-						<div className="text-[20px] tracking-tighter font-bold bg-[#191919] rounded-[20px] flex flex-col items-center justify-center w-full p-4">
-							<div>Remaining Time</div>
-							<div>
-								96 hours
-								{/* TODO: make it work */}
-								{/* {Math.ceil(
+						<div className="text-[20px] tracking-tighter relative font-bold overflow-hidden bg-[#191919] rounded-[20px] flex flex-col items-center justify-center w-full p-4">
+							{Array.from({ length: 15 }).map((_, index) => (
+								<div
+									key={index}
+									className="absolute w-[20px] h-[20px]"
+									style={{
+										top: `${Math.floor(index / 5) * 30 + 10}%`, // Adjust vertical spacing
+										left: `${(index % 5) * 20 + 7}%`, // Adjust horizontal spacing
+									}}
+								>
+									<Icons name="Pepe" />
+								</div>
+							))}
+							<div className="z-20 flex flex-col items-center">
+								<p>Remaining Time</p>
+								<p>
+									96 hours
+									{/* TODO: make it work */}
+									{/* {Math.ceil(
 																	(openedAirdrop.activeUntil.getTime() -
 																		new Date().getTime()) /
 																		(1000 * 60 * 60)
 																)}{" "}
 																hours */}
+								</p>
 							</div>
 						</div>
 						{local.openedAirdrop.actionUrl && (
