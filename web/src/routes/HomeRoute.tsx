@@ -5,6 +5,7 @@ import { useProxy } from "valtio/utils"
 // import { hc } from "hono/client"
 import { useQuery } from "@tanstack/react-query"
 import { Ads, Airdrops, Global } from "@ronin/drophunt"
+import Nav from "../components/Nav"
 
 // TODO: breaking for some reason..
 // const client = hc<AppType>("https://drophunt.nikiv.workers.dev")
@@ -12,6 +13,7 @@ import { Ads, Airdrops, Global } from "@ronin/drophunt"
 // const response = await client.index.$get()
 
 export const HomeRouteState = proxy({
+	activePage: "Airdrops" as "Airdrops" | "Claim" | "Earn",
 	ads: [] as Ads,
 	airdrops: [] as Airdrops,
 	global: {} as Global,
@@ -41,5 +43,11 @@ export default function HomeRoute() {
 
 	if (isFetching) return <div>Loading...</div>
 	if (error) return <div>Error: {JSON.stringify(error)}</div>
-	if (data) return <>{JSON.stringify(local.global)}</>
+	// if (data) return <>{JSON.stringify(local.global)}</>
+	if (data)
+		return (
+			<>
+				<Nav />
+			</>
+		)
 }
