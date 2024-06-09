@@ -60,7 +60,6 @@ export default function HomeRoute() {
 		},
 	})
 
-	// ..
 	if (isFetching) return <div className="text-white">Loading...</div>
 	if (error) return <div>Error: {JSON.stringify(error)}</div>
 	if (data)
