@@ -9,4 +9,15 @@ body {
 
 body {
   font-family: 'Inter Variable', sans-serif;
+	overflow-y: scroll;
+  scrollbar-width: none;
+}
+
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
+.headerFont {
+	font-family: "Dela Gothic One";
 }

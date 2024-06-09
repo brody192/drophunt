@@ -53,8 +53,8 @@ export default function HomeRoute() {
 		return (
 			<>
 				<div className="flex w-screen h-screen items-center justify-center">
-					<div className="w-[380px] h-[560px] bg-black overflow-auto rounded-[20px] border-2 border-slate-400/30">
-						<div className="py-[34px] px-[15px] text-white text-[14px] flex flex-col gap-[22px]">
+					<div className="w-[380px] h-[560px] bg-black overflow-auto rounded-[20px]">
+						<div className="py-[20px] px-[15px] text-white text-[14px] flex flex-col gap-[22px]">
 							<Nav />
 							<div className="w-full rounded-[20px] flex items-center justify-center bg-[#2e2e2e]">
 								<img

@@ -1,21 +1,22 @@
 import { useProxy } from "valtio/utils"
 import { HomeRouteState } from "../routes/HomeRoute"
 import Icons from "./Icons"
+import { TonConnectButton } from "@tonconnect/ui-react"
 
 export default function Nav() {
 	const local = useProxy(HomeRouteState)
 	console.log(local.activePage, "active page")
 	return (
-		<div className="flex justify-between items-center">
+		<div className="flex items-center justify-between">
 			{/* if no airdrop is open, then show nav bar */}
 			{local.openedAirdrop === null ? (
-				<div className="flex bg-[#191919] text-[12px] rounded-full h-[33px] items-center font-light">
+				<div className="flex mr-4 bg-[#191919] text-[12px] rounded-full h-[33px] items-center font-light">
 					<div
 						onClick={() => {
 							local.activePage = "Airdrops"
 						}}
 						style={local.activePage === "Airdrops" ? { fontWeight: 600 } : {}}
-						className={`p-2 px-4 h-full flex cursor-pointer items-center justify-center rounded-full ${
+						className={`p-2 h-full flex cursor-pointer items-center justify-center rounded-full ${
 							local.activePage === "Airdrops" ? "bg-[#2E2E2E]" : ""
 						}`}
 					>
@@ -56,10 +57,18 @@ export default function Nav() {
 			)}
 			{/* TODO: make it green and move it properly */}
 
-			{/* <TonConnectButton className="ton-connect-page__button" /> */}
-			<button className="bg-[#189A4C] rounded-full px-4 p-2">
-				Connect Wallet
-			</button>
+			{/* TODO: cannot make it not blue.. */}
+			<TonConnectButton
+				style={{}}
+				// className="bg-[#189A4C] rounded-full p-2"
+				// className="ton-connect-page__button"
+				// style={{
+				// 	backgroundColor: "#189A4C",
+				// 	borderRadius: "9999px",
+				// 	padding: "0.5rem",
+				// }}
+			/>
+			{/* <button className="bg-[#189A4C] rounded-full p-2">Connect Wallet</button> */}
 		</div>
 	)
 }
