@@ -17,6 +17,12 @@ const queryClient = new QueryClient()
 ReactDOM.createRoot(document.getElementById("root")!).render(
 	<React.StrictMode>
 		<QueryClientProvider client={queryClient}>
+			<link rel="preconnect" href="https://fonts.googleapis.com" />
+			<link rel="preconnect" href="https://fonts.gstatic.com" />
+			<link
+				href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap"
+				rel="stylesheet"
+			/>
 			<RouterProvider router={router} />
 		</QueryClientProvider>
 	</React.StrictMode>
