@@ -42,15 +42,18 @@ export default function HomeRoute() {
 		queryFn: async () => {
 			const response = await client.index.$get()
 			const resJson = await response.json()
+			// @ts-ignore
+			local.ads = resJson.ads
+			// @ts-ignore
+			local.airdrops = resJson.airdrops
+			// @ts-ignore
+			local.global = resJson.global
 
 			console.log(resJson, "resp")
 			return resJson
 			// const apiUrl = "https://drophunt.nikiv.workers.dev"
 			// const res = await fetch(apiUrl)
 			// const resJson = await res.json()
-			// local.ads = resJson.ads
-			// local.airdrops = resJson.airdrops
-			// local.global = resJson.global
 			// return true
 		},
 	})
