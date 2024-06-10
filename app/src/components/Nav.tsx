@@ -2,10 +2,22 @@ import { useProxy } from "valtio/utils"
 import { HomeRouteState } from "../routes/HomeRoute"
 import Icons from "./Icons"
 import { TonConnectButton } from "@tonconnect/ui-react"
+import { useEffect } from "react"
+import { useMutation } from "@tanstack/react-query"
 
 export default function Nav() {
 	const local = useProxy(HomeRouteState)
-	console.log(local.activePage, "active page")
+
+	// useEffect(() => {}, [local])
+	const mutation = useMutation({
+		mutationFn: (walletAddres: string) => {
+			return fetch("https://drophunt.nikiv.workers.dev/wallet-connected", {
+				method: "POST",
+				body: JSON.stringify({ walletAddress: walletAddres }),
+			})
+		},
+	})
+
 	return (
 		<div className="flex items-center justify-between">
 			{/* if no airdrop is open, then show nav bar */}

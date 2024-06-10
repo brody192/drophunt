@@ -16,6 +16,13 @@ const app = new Hono<{
 		])
 		return c.json({ airdrops, ads, global })
 	})
+	.post("/wallet-connected", async (c) => {
+		const { create, get } = c.var.ronin
+		const walletAddress = await c.req.param("wallet-address")
+		const user = await get.user()
+		console.log(walletAddress)
+		return c.json({ walletAddress })
+	})
 
 export default app
 export type AppType = typeof app

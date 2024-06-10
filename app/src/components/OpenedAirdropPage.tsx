@@ -1,9 +1,13 @@
 import { useProxy } from "valtio/utils"
 import { HomeRouteState } from "../routes/HomeRoute"
 import Icons from "./Icons"
+import { useUtils } from "@tma.js/sdk-react"
+import { useTonAddress } from "@tonconnect/ui-react"
 
 export default function OpenedAirdropPage() {
 	const local = useProxy(HomeRouteState)
+	const utils = useUtils()
+	const userFriendlyAddress = useTonAddress()
 
 	return (
 		<>
@@ -91,7 +95,10 @@ export default function OpenedAirdropPage() {
 							<button
 								className="bg-[#23C463] rounded-full w-full p-4 text-[18px] mt-[20px]"
 								onClick={() => {
-									// TODO:
+									console.log(userFriendlyAddress, "address")
+									// if (local.openedAirdrop) {
+									// 	utils.openTelegramLink(local.openedAirdrop.actionUrl)
+									// }
 								}}
 							>
 								Action

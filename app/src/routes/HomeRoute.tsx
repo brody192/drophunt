@@ -1,14 +1,14 @@
-import { proxy } from "valtio"
-import { useProxy } from "valtio/utils"
-import { Ads, Airdrop, Airdrops, Global } from "@ronin/drophunt"
-import { useQuery } from "@tanstack/react-query"
-import Nav from "@/components/Nav"
 import AirdropsPage from "@/components/AirdropsPage"
 import ClaimPage from "@/components/ClaimPage"
 import EarnPage from "@/components/EarnPage"
-import OpenedAirdropPage from "@/components/OpenedAirdropPage"
 import Footer from "@/components/Footer"
-import { icons } from "../pages/joinCommunity"
+import Nav from "@/components/Nav"
+import OpenedAirdropPage from "@/components/OpenedAirdropPage"
+import { Ads, Airdrop, Airdrops, Global } from "@ronin/drophunt"
+import { useMutation, useQuery } from "@tanstack/react-query"
+import { useEffect } from "react"
+import { proxy } from "valtio"
+import { useProxy } from "valtio/utils"
 
 export const HomeRouteState = proxy({
 	activePage: "Airdrops" as "Airdrops" | "Claim" | "Earn" | "OpenedAirdrop",
@@ -48,7 +48,7 @@ export default function HomeRoute() {
 		},
 	})
 
-	if (isFetching) return <div className="text-white">Loading...</div>
+	if (isFetching) return <div className="text-white"></div>
 	if (error) return <div>Error: {JSON.stringify(error)}</div>
 	if (data && local.ads.length > 0 && local.airdrops.length > 0 && local.global)
 		return (
