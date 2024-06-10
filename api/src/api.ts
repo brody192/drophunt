@@ -17,10 +17,27 @@ const app = new Hono<{
 		return c.json({ airdrops, ads, global })
 	})
 	.post("/wallet-connected", async (c) => {
-		const { create, get } = c.var.ronin
-		const walletAddress = await c.req.param("wallet-address")
-		const user = await get.user()
-		console.log(walletAddress)
+		const { create, get, set } = c.var.ronin
+		const walletAddress = c.req.query("wallet-address")
+		const telegramId = c.req.query("telegram-id")
+		console.log(walletAddress, "wallet address")
+		console.log(telegramId, "telegram id")
+		if (!walletAddress || !telegramId) {
+			throw new Error("Missing wallet address or telegram id")
+		}
+		let user = await get.user.with({
+			telegramId,
+		})
+		if (!user) {
+			user = await create.user.with({
+				telegramId,
+			})
+		}
+
+		await create.connection.with({
+			walletAddress,
+			user: user.id,
+		})
 		return c.json({ walletAddress })
 	})
 

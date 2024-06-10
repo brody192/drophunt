@@ -5,10 +5,11 @@ import Footer from "@/components/Footer"
 import Nav from "@/components/Nav"
 import OpenedAirdropPage from "@/components/OpenedAirdropPage"
 import { Ads, Airdrop, Airdrops, Global } from "@ronin/drophunt"
-import { useMutation, useQuery } from "@tanstack/react-query"
-import { useEffect } from "react"
+import { useQuery } from "@tanstack/react-query"
 import { proxy } from "valtio"
 import { useProxy } from "valtio/utils"
+import { AppType } from "../../../api/src/api"
+import { hc } from "hono/client"
 
 export const HomeRouteState = proxy({
 	activePage: "Airdrops" as "Airdrops" | "Claim" | "Earn" | "OpenedAirdrop",
@@ -32,12 +33,16 @@ export const HomeRouteState = proxy({
 	global: {} as Global,
 })
 
+const client = hc<AppType>("https://drophunt.nikiv.workers.dev")
+
 export default function HomeRoute() {
 	const local = useProxy(HomeRouteState)
-
 	const { error, data, isFetching } = useQuery({
 		queryKey: ["global"],
 		queryFn: async () => {
+			const response = await client.index.$get()
+			console.log(response, "resp")
+			return
 			const apiUrl = "https://drophunt.nikiv.workers.dev"
 			const res = await fetch(apiUrl)
 			const resJson = await res.json()

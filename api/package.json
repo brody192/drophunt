@@ -12,7 +12,7 @@
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20240605.0",
-    "@ronin/drophunt": "^0.0.0-3435601439825",
+    "@ronin/drophunt": "^0.0.0-3435696690848",
     "wrangler": "^3.60.0"
   }
 }
