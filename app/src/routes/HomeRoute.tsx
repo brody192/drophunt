@@ -8,7 +8,7 @@ import { Ads, Airdrop, Airdrops, Global } from "@ronin/drophunt"
 import { useQuery } from "@tanstack/react-query"
 import { proxy } from "valtio"
 import { useProxy } from "valtio/utils"
-import { AppType } from "../../../api/src/api"
+import { AppType } from "api/src/api"
 import { hc } from "hono/client"
 
 export const HomeRouteState = proxy({
@@ -41,15 +41,17 @@ export default function HomeRoute() {
 		queryKey: ["global"],
 		queryFn: async () => {
 			const response = await client.index.$get()
-			console.log(response, "resp")
-			return
-			const apiUrl = "https://drophunt.nikiv.workers.dev"
-			const res = await fetch(apiUrl)
-			const resJson = await res.json()
-			local.ads = resJson.ads
-			local.airdrops = resJson.airdrops
-			local.global = resJson.global
-			return true
+			const resJson = await response.json()
+
+			console.log(resJson, "resp")
+			return resJson
+			// const apiUrl = "https://drophunt.nikiv.workers.dev"
+			// const res = await fetch(apiUrl)
+			// const resJson = await res.json()
+			// local.ads = resJson.ads
+			// local.airdrops = resJson.airdrops
+			// local.global = resJson.global
+			// return true
 		},
 	})
 

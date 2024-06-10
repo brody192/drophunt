@@ -10,5 +10,10 @@
 	"prettier": {
 		"semi": false,
 		"useTabs": true
-	}
+	},
+	"workspaces": [
+		"api",
+		"app",
+		"web"
+	]
 }
