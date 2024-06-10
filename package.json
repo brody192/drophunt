@@ -5,7 +5,8 @@
 		"web": "cd web && bun dev",
 		"app": "cd app && bun dev",
 		"api": "cd api && bun dev",
-		"api:deploy": "cd api && bun run deploy"
+		"api:deploy": "cd api && bun run deploy",
+		"build": "bun run --filter '*' build"
 	},
 	"prettier": {
 		"semi": false,
