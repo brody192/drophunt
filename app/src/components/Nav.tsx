@@ -49,6 +49,7 @@ export default function Nav() {
 				<div
 					onClick={() => {
 						local.openedAirdrop = null
+						local.activePage = "Airdrops"
 					}}
 					className="cursor-pointer hover:scale-[1.1] transition-all"
 				>

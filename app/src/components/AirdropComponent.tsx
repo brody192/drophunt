@@ -10,7 +10,7 @@ export default function AirdropComponent(props: { airdrop: Airdrop }) {
 				local.activePage = "OpenedAirdrop"
 				local.openedAirdrop = props.airdrop
 			}}
-			className="w-full cursor-pointer flex flex-col gap-3 bg-[#191919] p-[12px] pr-[14px] rounded-[20px]"
+			className="w-full cursor-pointer flex flex-col gap-3 bg-[#191919] p-5 rounded-[20px]"
 		>
 			<div className="flex gap-4 w-full">
 				{props.airdrop.image.src && (
@@ -19,12 +19,7 @@ export default function AirdropComponent(props: { airdrop: Airdrop }) {
 					</div>
 				)}
 				<div className="w-full flex flex-col gap-1">
-					<div
-						className="font-bold text-[21px]"
-						style={{
-							fontFamily: "Dela Gothic One",
-						}}
-					>
+					<div className="font-bold text-[21px] headerFont">
 						{props.airdrop.name}
 					</div>
 					<p className="text-white/60 font-light text-[12px] line-clamp-2">
@@ -32,7 +27,7 @@ export default function AirdropComponent(props: { airdrop: Airdrop }) {
 					</p>
 				</div>
 			</div>
-			<div className="flex gap-1 items-center text-[12px]">
+			<div className="flex space-x-2 items-center text-[12px]">
 				<button className="bg-[#189A4C] rounded-full px-3 p-1">Active</button>
 				<div className="border border-[#3A3A3A] rounded-full px-3 p-1">
 					{props.airdrop.blockchain}

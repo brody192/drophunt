@@ -1,7 +1,9 @@
+import { icons } from "../pages/joinCommunity"
+
 export default function Footer() {
 	return (
 		<>
-			<div className="w-full h-[400px] flex flex-col gap-[18px] p-4 px-5 bg-[#191919]">
+			<div className="w-full h-full px-5 py-8 flex flex-col gap-[18px] bg-[#191919]">
 				<div className="flex space-x-25 justify-between">
 					<div className="flex flex-col space-y-3">
 						<h1 className="text-[18px] text-white headerFont">About</h1>
@@ -19,13 +21,13 @@ export default function Footer() {
 						</div>
 					</div>
 				</div>
-				<div className="flex flex-col gap-[10px]">
+				<div className="flex flex-col space-y-4">
 					<h1 className="text-[18px] text-white headerFont">
 						Join our community
 					</h1>
-					<div className="flex gap-[10px] text-white/50  text-[14px]">
-						<div>Telegram</div>
-						<div>Messager</div>
+					<div className="flex flex-row space-x-5 items-center">
+						<icons.TelegramSvg />
+						<icons.BotSvg />
 					</div>
 				</div>
 			</div>

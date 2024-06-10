@@ -8,6 +8,7 @@ import ClaimPage from "@/components/ClaimPage"
 import EarnPage from "@/components/EarnPage"
 import OpenedAirdropPage from "@/components/OpenedAirdropPage"
 import Footer from "@/components/Footer"
+import { icons } from "../pages/joinCommunity"
 
 export const HomeRouteState = proxy({
 	activePage: "Airdrops" as "Airdrops" | "Claim" | "Earn" | "OpenedAirdrop",
@@ -51,35 +52,33 @@ export default function HomeRoute() {
 	if (error) return <div>Error: {JSON.stringify(error)}</div>
 	if (data && local.ads.length > 0 && local.airdrops.length > 0 && local.global)
 		return (
-			<>
-				<div className="flex items-center justify-center">
-					<div className="bg-black overflow-auto rounded-[20px]">
-						<div className="py-[20px] px-[15px] text-white text-[14px] flex flex-col gap-[22px]">
-							<Nav />
-							<div className="w-full rounded-[20px] flex items-center justify-center bg-[#2e2e2e]">
-								<img
-									src={local.ads[0].image.src}
-									className="w-full h-full object-cover"
-								/>
-							</div>
-							{(() => {
-								switch (local.activePage) {
-									case "Airdrops":
-										return <AirdropsPage />
-									case "Claim":
-										return <ClaimPage />
-									case "Earn":
-										return <EarnPage />
-									case "OpenedAirdrop":
-										return <OpenedAirdropPage />
-									default:
-										return <></>
-								}
-							})()}
+			<div className="flex items-center justify-center">
+				<div className="overflow-auto">
+					<div className="py-[20px] px-[15px] text-white text-[14px] flex flex-col gap-[22px]">
+						<Nav />
+						<div className="w-full rounded-[20px] flex items-center justify-center bg-[#2e2e2e]">
+							<img
+								src={local.ads[0].image.src}
+								className="w-full h-full object-cover"
+							/>
 						</div>
-						<Footer />
+						{(() => {
+							switch (local.activePage) {
+								case "Airdrops":
+									return <AirdropsPage />
+								case "Claim":
+									return <ClaimPage />
+								case "Earn":
+									return <EarnPage />
+								case "OpenedAirdrop":
+									return <OpenedAirdropPage />
+								default:
+									return <></>
+							}
+						})()}
 					</div>
+					<Footer />
 				</div>
-			</>
+			</div>
 		)
 }
