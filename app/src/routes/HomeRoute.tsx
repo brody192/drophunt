@@ -49,10 +49,10 @@ export default function HomeRoute() {
 
 	if (isFetching) return <div className="text-white">Loading...</div>
 	if (error) return <div>Error: {JSON.stringify(error)}</div>
-	if (data)
+	if (data && local.ads.length > 0 && local.airdrops.length > 0 && local.global)
 		return (
 			<>
-				<div className="flex w-screen h-screen items-center justify-center">
+				<div className="flex items-center justify-center">
 					<div className="bg-black overflow-auto rounded-[20px]">
 						<div className="py-[20px] px-[15px] text-white text-[14px] flex flex-col gap-[22px]">
 							<Nav />
