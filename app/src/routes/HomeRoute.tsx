@@ -61,6 +61,7 @@ export default function HomeRoute() {
 			return resJson
 		},
 	})
+	console.log(import.meta.env.VITE_API_TOKEN, "token!")
 	const walletConnected = useMutation({
 		mutationFn: ({
 			walletAddress,
@@ -76,8 +77,7 @@ export default function HomeRoute() {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
-					// TODO: add secret back
-					// Authorization: "Bearer secret",
+					Authorization: `Bearer ${import.meta.env.VITE_API_TOKEN}`,
 				},
 				body: JSON.stringify({
 					walletAddress: walletAddress,

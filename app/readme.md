@@ -1,4 +1,4 @@
-# Drophunt Telegram Mini App
+# Telegram Mini App
 
 ## Deployed
 
