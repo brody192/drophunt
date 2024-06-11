@@ -1,6 +1,11 @@
+import { useUtils } from "@tma.js/sdk-react"
 import { icons } from "../pages/joinCommunity"
+import { useProxy } from "valtio/utils"
+import { HomeRouteState } from "@/routes/HomeRoute"
 
 export default function Footer() {
+	const local = useProxy(HomeRouteState)
+	const utils = useUtils()
 	return (
 		<>
 			<div className="w-full h-full px-5 py-8 flex flex-col gap-[18px] bg-[#191919]">
@@ -26,7 +31,13 @@ export default function Footer() {
 						Join our community
 					</h1>
 					<div className="flex flex-row space-x-5 items-center">
-						<icons.TelegramSvg />
+						<button
+							onClick={() => {
+								utils.openTelegramLink("https://t.me/drophunt")
+							}}
+						>
+							<icons.TelegramSvg />
+						</button>
 						<icons.BotSvg />
 					</div>
 				</div>
