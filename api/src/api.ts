@@ -25,9 +25,9 @@ const app = new Hono<{
 	.post("/wallet-connected", async (c) => {
 		const { create, get } = c.var.ronin
 		const walletAddress = c.req.query("wallet-address")
-		const telegramId = c.req.query("telegramm -id")
+		const telegramId = c.req.query("telegram-id")
 		const telegramUsername = c.req.query("telegram-username")
-		if (!walletAddress || !telegramId) {
+		if (!walletAddress || !telegramId || !telegramUsername) {
 			throw new Error("Missing wallet address or telegram id")
 		}
 		let user = await get.user.with({
