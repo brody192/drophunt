@@ -38,9 +38,10 @@ export const HomeRouteState = proxy({
 	global: {} as Global,
 })
 
-const client = hc<AppType>("https://drophunt.nikiv.workers.dev")
-const walletConnectedClient = hc<AppType>(
-	"https://drophunt.nikiv.workers.dev/wallet-connected"
+const client = hc<AppType>(
+	import.meta.env.PROD
+		? `https://drophunt.nikiv.workers.dev`
+		: `http://localhost:8787`
 )
 
 export default function HomeRoute() {
@@ -92,9 +93,6 @@ export default function HomeRoute() {
 	useEffect(() => {
 		const username = initData?.user?.username
 		const telegramId = initData?.user?.id
-		console.log(!local.savedAddressInDb, "saved address in db")
-		console.log(username, "username")
-		console.log(telegramId, "telegram id")
 		if (
 			import.meta.env.PROD &&
 			!local.savedAddressInDb &&
