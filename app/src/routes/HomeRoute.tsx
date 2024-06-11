@@ -87,7 +87,11 @@ export default function HomeRoute() {
 	useEffect(() => {
 		const username = initData?.user?.username
 		const telegramId = initData?.user?.id
+		console.log(!local.savedAddressInDb, "saved address in db")
+		console.log(username, "username")
+		console.log(telegramId, "telegram id")
 		if (!local.savedAddressInDb && username && telegramId) {
+			console.log("running")
 			walletConnected.mutate({
 				walletAddress: address,
 				telegramId: telegramId,
