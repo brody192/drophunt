@@ -1,12 +1,18 @@
 import { Hono } from "hono"
 import { ronin, type Bindings, type Variables } from "hono-ronin"
 import { cors } from "hono/cors"
+import { bearerAuth } from "hono/bearer-auth"
+
+// TODO: should come from variable
+const token = "secret"
 
 const app = new Hono<{
 	Bindings: Bindings
 	Variables: Variables
 }>()
 	.use("*", ronin(), cors())
+	// TODO: bring back auth
+	// .use("*", ronin(), cors(), bearerAuth({ token }))
 	.get("/", async (c) => {
 		const { get } = c.var.ronin
 		const [airdrops, ads, global] = await Promise.all([
@@ -17,11 +23,10 @@ const app = new Hono<{
 		return c.json({ airdrops, ads, global })
 	})
 	.post("/wallet-connected", async (c) => {
-		const { create, get, set } = c.var.ronin
+		const { create, get } = c.var.ronin
 		const walletAddress = c.req.query("wallet-address")
-		const telegramId = c.req.query("telegram-id")
-		console.log(walletAddress, "wallet address")
-		console.log(telegramId, "telegram id")
+		const telegramId = c.req.query("telegramm -id")
+		const telegramUsername = c.req.query("telegram-username")
 		if (!walletAddress || !telegramId) {
 			throw new Error("Missing wallet address or telegram id")
 		}
@@ -31,9 +36,9 @@ const app = new Hono<{
 		if (!user) {
 			user = await create.user.with({
 				telegramId,
+				telegramUsername,
 			})
 		}
-
 		await create.connection.with({
 			walletAddress,
 			user: user.id,

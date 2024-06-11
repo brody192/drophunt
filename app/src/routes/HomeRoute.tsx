@@ -5,17 +5,21 @@ import Footer from "@/components/Footer"
 import Nav from "@/components/Nav"
 import OpenedAirdropPage from "@/components/OpenedAirdropPage"
 import { Ads, Airdrop, Airdrops, Global } from "@ronin/drophunt"
-import { useQuery } from "@tanstack/react-query"
+import { useMutation, useQuery } from "@tanstack/react-query"
 import { proxy } from "valtio"
 import { useProxy } from "valtio/utils"
 import { AppType } from "api/src/api"
 import { hc } from "hono/client"
+import { useEffect } from "react"
+import { useTonWallet, useTonAddress } from "@tonconnect/ui-react"
+import { useInitData } from "@tma.js/sdk-react"
 
 export const HomeRouteState = proxy({
 	activePage: "Airdrops" as "Airdrops" | "Claim" | "Earn" | "OpenedAirdrop",
 	activeFilters: [] as string[],
 	openedAirdrop: null as Airdrop | null,
 	openFilterMenu: false,
+	savedAddressInDb: false,
 	availableFilterOptions: ["The Open Network", "Solana", "Polygon", "Ethereum"],
 	// TODO: remove, comes from `global`
 	blockchainLogos: {
@@ -42,21 +46,56 @@ export default function HomeRoute() {
 		queryFn: async () => {
 			const response = await client.index.$get()
 			const resJson = await response.json()
+			// TODO: ask ronin why types are off
 			// @ts-ignore
 			local.ads = resJson.ads
 			// @ts-ignore
 			local.airdrops = resJson.airdrops
 			// @ts-ignore
 			local.global = resJson.global
-
-			console.log(resJson, "resp")
 			return resJson
-			// const apiUrl = "https://drophunt.nikiv.workers.dev"
-			// const res = await fetch(apiUrl)
-			// const resJson = await res.json()
-			// return true
 		},
 	})
+	const walletConnected = useMutation({
+		mutationFn: ({
+			walletAddress,
+			telegramId,
+			telegramUsername,
+		}: {
+			walletAddress: string
+			telegramId: number
+			telegramUsername: string
+		}) => {
+			return fetch(`https://drophunt.nikiv.workers.dev/wallet-connected`, {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+					// TODO: add secret back
+					// Authorization: "Bearer secret",
+				},
+				body: JSON.stringify({
+					"wallet-address": walletAddress,
+					"telegram-id": telegramId,
+					"telegram-username": telegramUsername,
+				}),
+			})
+		},
+	})
+
+	const initData = useInitData()
+	const address = useTonAddress()
+	useEffect(() => {
+		const username = initData?.user?.username
+		const telegramId = initData?.user?.id
+		if (!local.savedAddressInDb && username && telegramId) {
+			walletConnected.mutate({
+				walletAddress: address,
+				telegramId: telegramId,
+				telegramUsername: username,
+			})
+			local.savedAddressInDb = true
+		}
+	}, [address, initData])
 
 	if (isFetching) return <div className="text-white"></div>
 	if (error) return <div>Error: {JSON.stringify(error)}</div>

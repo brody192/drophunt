@@ -1,9 +1,8 @@
+import { useMutation } from "@tanstack/react-query"
+import { TonConnectButton } from "@tonconnect/ui-react"
 import { useProxy } from "valtio/utils"
 import { HomeRouteState } from "../routes/HomeRoute"
 import Icons from "./Icons"
-import { TonConnectButton } from "@tonconnect/ui-react"
-import { useEffect } from "react"
-import { useMutation } from "@tanstack/react-query"
 
 export default function Nav() {
 	const local = useProxy(HomeRouteState)

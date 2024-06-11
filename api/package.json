@@ -1,19 +1,19 @@
 {
-	"name": "api",
-	"scripts": {
-		"dev": "wrangler dev src/api.ts",
-		"deploy": "wrangler deploy --minify src/api.ts"
-	},
-	"dependencies": {
-		"@hono/zod-validator": "^0.2.2",
-		"hono": "^4.4.4",
-		"hono-ronin": "^1.0.5",
-		"zod": "^3.23.8"
-	},
-	"main": "src/api.ts",
-	"devDependencies": {
-		"@cloudflare/workers-types": "^4.20240605.0",
-		"@ronin/drophunt": "^0.0.0-3435696690848",
-		"wrangler": "^3.60.0"
-	}
+  "name": "api",
+  "scripts": {
+    "dev": "wrangler dev src/api.ts",
+    "deploy": "wrangler deploy --minify src/api.ts"
+  },
+  "dependencies": {
+    "@hono/zod-validator": "^0.2.2",
+    "hono": "^4.4.4",
+    "hono-ronin": "^1.0.5",
+    "zod": "^3.23.8"
+  },
+  "main": "src/api.ts",
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20240605.0",
+    "@ronin/drophunt": "^0.0.0-3435719749853",
+    "wrangler": "^3.60.1"
+  }
 }
