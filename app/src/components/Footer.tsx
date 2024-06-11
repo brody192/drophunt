@@ -1,10 +1,7 @@
 import { useUtils } from "@tma.js/sdk-react"
 import { icons } from "../pages/joinCommunity"
-import { useProxy } from "valtio/utils"
-import { HomeRouteState } from "@/routes/HomeRoute"
 
 export default function Footer() {
-	const local = useProxy(HomeRouteState)
 	const utils = useUtils()
 	return (
 		<>
