@@ -93,16 +93,23 @@ export default function OpenedAirdropPage() {
 						</div>
 						{local.openedAirdrop.actionUrl && (
 							<button
-								className="bg-[#23C463] rounded-full w-full p-4 text-[18px] mt-[20px]"
+								className={
+									local.walletConnected
+										? `rounded-full w-full p-4 text-[18px] mt-[20px] bg-[#23C463]`
+										: `rounded-full w-full p-4 text-[18px] mt-[20px] bg-gray cursor-not-allowed`
+								}
 								onClick={() => {
-									console.log(userFriendlyAddress, "address")
-									// if (local.openedAirdrop) {
-									// 	utils.openTelegramLink(local.openedAirdrop.actionUrl)
-									// }
+									if (!local.walletConnected) return
+									if (local.openedAirdrop) {
+										utils.openTelegramLink(local.openedAirdrop.actionUrl)
+									}
 								}}
 							>
 								Action
 							</button>
+						)}
+						{!local.walletConnected && (
+							<div>Connect wallet to participate in Airdrop</div>
 						)}
 					</div>
 				</>

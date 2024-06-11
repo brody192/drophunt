@@ -18,6 +18,7 @@ export const HomeRouteState = proxy({
 	activePage: "Airdrops" as "Airdrops" | "Claim" | "Earn" | "OpenedAirdrop",
 	activeFilters: [] as string[],
 	openedAirdrop: null as Airdrop | null,
+	walletConnected: false,
 	openFilterMenu: false,
 	savedAddressInDb: false,
 	availableFilterOptions: ["The Open Network", "Solana", "Polygon", "Ethereum"],
@@ -95,7 +96,7 @@ export default function HomeRoute() {
 		console.log(username, "username")
 		console.log(telegramId, "telegram id")
 		if (!local.savedAddressInDb && username && telegramId && address) {
-			console.log("running")
+			local.walletConnected = true
 			walletConnected.mutate({
 				walletAddress: address,
 				telegramId: telegramId,
