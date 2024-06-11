@@ -25,9 +25,7 @@ const app = new Hono<{
 	})
 	.post("/wallet-connected", async (c) => {
 		const { create, get } = c.var.ronin
-		const walletAddress = c.req.query("wallet-address")
-		const telegramId = c.req.query("telegram-id")
-		const telegramUsername = c.req.query("telegram-username")
+		const { walletAddress, telegramId, telegramUsername } = await c.req.json()
 		console.log(walletAddress, "wallet address")
 		console.log(telegramId, "telegram id")
 		console.log(telegramUsername, "telegram username")
@@ -51,7 +49,7 @@ const app = new Hono<{
 	})
 	.onError((err, c) => {
 		console.error(err.stack)
-		return c.text("Custom Error Message", 500)
+		return c.json(err)
 	})
 
 export default app

@@ -38,6 +38,9 @@ export const HomeRouteState = proxy({
 })
 
 const client = hc<AppType>("https://drophunt.nikiv.workers.dev")
+const walletConnectedClient = hc<AppType>(
+	"https://drophunt.nikiv.workers.dev/wallet-connected"
+)
 
 export default function HomeRoute() {
 	const local = useProxy(HomeRouteState)
@@ -75,9 +78,9 @@ export default function HomeRoute() {
 					// Authorization: "Bearer secret",
 				},
 				body: JSON.stringify({
-					"wallet-address": walletAddress,
-					"telegram-id": telegramId,
-					"telegram-username": telegramUsername,
+					walletAddress: walletAddress,
+					telegramId: telegramId,
+					telegramUsername: telegramUsername,
 				}),
 			})
 		},
