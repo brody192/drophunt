@@ -6,13 +6,13 @@ import Nav from "@/components/Nav"
 import OpenedAirdropPage from "@/components/OpenedAirdropPage"
 import { Ads, Airdrop, Airdrops, Global } from "@ronin/drophunt"
 import { useMutation, useQuery } from "@tanstack/react-query"
-import { proxy } from "valtio"
-import { useProxy } from "valtio/utils"
+import { useInitData } from "@tma.js/sdk-react"
+import { useTonAddress } from "@tonconnect/ui-react"
 import { AppType } from "api/src/api"
 import { hc } from "hono/client"
 import { useEffect } from "react"
-import { useTonWallet, useTonAddress } from "@tonconnect/ui-react"
-import { useInitData } from "@tma.js/sdk-react"
+import { proxy } from "valtio"
+import { useProxy } from "valtio/utils"
 
 export const HomeRouteState = proxy({
 	activePage: "Airdrops" as "Airdrops" | "Claim" | "Earn" | "OpenedAirdrop",
@@ -95,7 +95,13 @@ export default function HomeRoute() {
 		console.log(!local.savedAddressInDb, "saved address in db")
 		console.log(username, "username")
 		console.log(telegramId, "telegram id")
-		if (!local.savedAddressInDb && username && telegramId && address) {
+		if (
+			import.meta.env.PROD &&
+			!local.savedAddressInDb &&
+			username &&
+			telegramId &&
+			address
+		) {
 			local.walletConnected = true
 			walletConnected.mutate({
 				walletAddress: address,

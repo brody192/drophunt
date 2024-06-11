@@ -11,7 +11,6 @@ const app = new Hono<{
 	Variables: Variables
 }>()
 	.use("*", ronin(), cors())
-	// .onError((c, e) => {}),
 	// TODO: bring back auth
 	// .use("*", ronin(), cors(), bearerAuth({ token }))
 	.get("/", async (c) => {
