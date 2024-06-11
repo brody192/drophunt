@@ -66,6 +66,7 @@ export default function HomeRoute() {
 			telegramId: number
 			telegramUsername: string
 		}) => {
+			// const mutationResponse = await client.index.
 			return fetch(`https://drophunt.nikiv.workers.dev/wallet-connected`, {
 				method: "POST",
 				headers: {

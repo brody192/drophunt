@@ -11,6 +11,7 @@ const app = new Hono<{
 	Variables: Variables
 }>()
 	.use("*", ronin(), cors())
+	// .onError((c, e) => {}),
 	// TODO: bring back auth
 	// .use("*", ronin(), cors(), bearerAuth({ token }))
 	.get("/", async (c) => {
@@ -27,6 +28,9 @@ const app = new Hono<{
 		const walletAddress = c.req.query("wallet-address")
 		const telegramId = c.req.query("telegram-id")
 		const telegramUsername = c.req.query("telegram-username")
+		console.log(walletAddress, "wallet address")
+		console.log(telegramId, "telegram id")
+		console.log(telegramUsername, "telegram username")
 		if (!walletAddress || !telegramId || !telegramUsername) {
 			throw new Error("Missing wallet address or telegram id")
 		}
@@ -44,6 +48,10 @@ const app = new Hono<{
 			user: user.id,
 		})
 		return c.json({ walletAddress })
+	})
+	.onError((err, c) => {
+		console.error(err.stack)
+		return c.text("Custom Error Message", 500)
 	})
 
 export default app
