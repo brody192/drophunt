@@ -90,7 +90,7 @@ export default function HomeRoute() {
 		console.log(!local.savedAddressInDb, "saved address in db")
 		console.log(username, "username")
 		console.log(telegramId, "telegram id")
-		if (!local.savedAddressInDb && username && telegramId) {
+		if (!local.savedAddressInDb && username && telegramId && address) {
 			console.log("running")
 			walletConnected.mutate({
 				walletAddress: address,
