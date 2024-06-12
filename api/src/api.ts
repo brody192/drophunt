@@ -1,5 +1,5 @@
 import { Elysia } from "elysia"
-import { get, create } from "ronin"
+import { get } from "ronin"
 
 const app = new Elysia()
 	.get("/", async () => {
