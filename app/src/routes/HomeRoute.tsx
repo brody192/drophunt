@@ -8,8 +8,6 @@ import { Ads, Airdrop, Airdrops, Global } from "@ronin/drophunt"
 import { useMutation, useQuery } from "@tanstack/react-query"
 import { useInitData } from "@tma.js/sdk-react"
 import { useTonAddress } from "@tonconnect/ui-react"
-// import { AppType } from "hono-api/src/api"
-// import { hc } from "hono/client"
 import { useEffect } from "react"
 import { proxy } from "valtio"
 import { useProxy } from "valtio/utils"
@@ -38,23 +36,15 @@ export const HomeRouteState = proxy({
 	global: {} as Global,
 })
 
-// const client = hc<AppType>(
-// 	import.meta.env.PROD
-// 		? `https://drophunt.nikiv.workers.dev`
-// 		: `http://localhost:8787`
-// )
-
 export default function HomeRoute() {
 	const local = useProxy(HomeRouteState)
 	const { error, data, isFetching } = useQuery({
 		queryKey: ["HomeRouteState"],
 		queryFn: async () => {
-			// const response = await client.index.$get()
 			const res = await fetch(`https://drophunt.nikiv.workers.dev/`, {
 				method: "GET",
 				headers: {
 					"Content-Type": "application/json",
-					// Authorization: `Bearer ${import.meta.env.VITE_API_TOKEN}`,
 				},
 			})
 			const resJson = await res.json()
@@ -67,7 +57,6 @@ export default function HomeRoute() {
 			return resJson
 		},
 	})
-	// console.log(import.meta.env.VITE_API_TOKEN, "token!")
 	const walletConnected = useMutation({
 		mutationFn: ({
 			walletAddress,
@@ -82,7 +71,6 @@ export default function HomeRoute() {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
-					// Authorization: `Bearer ${import.meta.env.VITE_API_TOKEN}`,
 				},
 				body: JSON.stringify({
 					walletAddress: walletAddress,

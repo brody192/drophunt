@@ -8,20 +8,16 @@ bun i
 
 ## Run API
 
+Setup/details in [api/readme.md](api/readme.md).
+
 ```
 bun api
 ```
 
 ## Run Telegram mini app
 
-Instructions for setup in [app/readme.md](app/readme.md).
+Setup/details in [app/readme.md](app/readme.md).
 
 ```
 bun app
-```
-
-## Run website
-
-```
-bun web
 ```
