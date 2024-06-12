@@ -67,6 +67,8 @@ Connect to Vercel using these settings:
 
 ![](docs/images/vercel.png)
 
+And add valid `RONIN_TOKEN` in env.
+
 ## Notes
 
 Built from [Telegram Mini Apps React template](https://github.com/Telegram-Mini-Apps/reactjs-template).
