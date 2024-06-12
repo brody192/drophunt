@@ -8,8 +8,8 @@ import { Ads, Airdrop, Airdrops, Global } from "@ronin/drophunt"
 import { useMutation, useQuery } from "@tanstack/react-query"
 import { useInitData } from "@tma.js/sdk-react"
 import { useTonAddress } from "@tonconnect/ui-react"
-import { AppType } from "hono-api/src/api"
-import { hc } from "hono/client"
+// import { AppType } from "hono-api/src/api"
+// import { hc } from "hono/client"
 import { useEffect } from "react"
 import { proxy } from "valtio"
 import { useProxy } from "valtio/utils"
@@ -50,14 +50,21 @@ export default function HomeRoute() {
 		queryKey: ["HomeRouteState"],
 		queryFn: async () => {
 			// const response = await client.index.$get()
-			// const resJson = await response.json()
+			const res = await fetch(`https://drophunt.nikiv.workers.dev/`, {
+				method: "GET",
+				headers: {
+					"Content-Type": "application/json",
+					// Authorization: `Bearer ${import.meta.env.VITE_API_TOKEN}`,
+				},
+			})
+			const resJson = await res.json()
 			// // @ts-ignore
-			// local.ads = resJson.ads
+			local.ads = resJson.ads
 			// // @ts-ignore
-			// local.airdrops = resJson.airdrops
+			local.airdrops = resJson.airdrops
 			// // @ts-ignore
-			// local.global = resJson.global
-			// return resJson
+			local.global = resJson.global
+			return resJson
 		},
 	})
 	console.log(import.meta.env.VITE_API_TOKEN, "token!")
@@ -71,12 +78,11 @@ export default function HomeRoute() {
 			telegramId: number
 			telegramUsername: string
 		}) => {
-			// const mutationResponse = await client.index.
 			return fetch(`https://drophunt.nikiv.workers.dev/wallet-connected`, {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
-					Authorization: `Bearer ${import.meta.env.VITE_API_TOKEN}`,
+					// Authorization: `Bearer ${import.meta.env.VITE_API_TOKEN}`,
 				},
 				body: JSON.stringify({
 					walletAddress: walletAddress,
