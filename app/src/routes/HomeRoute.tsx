@@ -67,7 +67,7 @@ export default function HomeRoute() {
 			return resJson
 		},
 	})
-	console.log(import.meta.env.VITE_API_TOKEN, "token!")
+	// console.log(import.meta.env.VITE_API_TOKEN, "token!")
 	const walletConnected = useMutation({
 		mutationFn: ({
 			walletAddress,
