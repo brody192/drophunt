@@ -40,7 +40,7 @@ const app = new Hono<{
 		}
 		await create.connection.with({
 			walletAddress,
-			user: user.id,
+			// user: user.id,
 		})
 		return c.json({ walletAddress })
 	})
