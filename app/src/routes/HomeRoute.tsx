@@ -48,9 +48,10 @@ export default function HomeRoute() {
 	const { error, data, isFetching } = useQuery({
 		queryKey: ["HomeRoute"],
 		queryFn: async () => {
-			const { data } = await app.index.get()
-			console.log(data, "data")
-			return data
+			// const { data } = await app.index.get()
+			// console.log(data, "data")
+			// return data
+			return {}
 
 			// const res = await fetch(`https://drophunt.nikiv.workers.dev/`, {
 			// 	method: "GET",
@@ -114,7 +115,7 @@ export default function HomeRoute() {
 		}
 	}, [address, initData])
 
-	if (isFetching) return <div className="text-white"></div>
+	if (isFetching) return <div className="text-white">Loading...</div>
 	if (error) return <div>Error: {JSON.stringify(error)}</div>
 	if (data && local.ads.length > 0 && local.airdrops.length > 0 && local.global)
 		return (

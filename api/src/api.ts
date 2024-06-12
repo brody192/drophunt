@@ -3,7 +3,10 @@ import { get } from "ronin"
 import { cors } from "@elysiajs/cors"
 
 const app = new Elysia()
-	.use(cors())
+	.use(cors({ origin: "*" }))
+	// .use(cors, {
+	// 	origin: ({ request, headers }) => true,
+	// })
 	.get("/", async () => {
 		const [airdrops, ads, global] = await Promise.all([
 			get.airdrops(),
