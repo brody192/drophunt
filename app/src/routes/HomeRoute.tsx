@@ -20,7 +20,6 @@ export const HomeRouteState = proxy({
 	openFilterMenu: false,
 	savedAddressInDb: false,
 	availableFilterOptions: ["The Open Network", "Solana", "Polygon", "Ethereum"],
-	// TODO: remove, comes from `global`
 	blockchainLogos: {
 		Solana:
 			"https://storage.ronin.co/spa_ytxzy7a722jx52um/7cc8408f-0eb4-4d78-9747-ffc2408a0230",
@@ -35,11 +34,11 @@ export const HomeRouteState = proxy({
 	airdrops: [] as Airdrops,
 	global: {} as Global,
 })
-
 export default function HomeRoute() {
 	const local = useProxy(HomeRouteState)
+
 	const { error, data, isFetching } = useQuery({
-		queryKey: ["HomeRouteState"],
+		queryKey: ["HomeRoute"],
 		queryFn: async () => {
 			const res = await fetch(`https://drophunt.nikiv.workers.dev/`, {
 				method: "GET",
@@ -48,11 +47,11 @@ export default function HomeRoute() {
 				},
 			})
 			const resJson = await res.json()
-			// // @ts-ignore
+			// @ts-ignore
 			local.ads = resJson.ads
-			// // @ts-ignore
+			// @ts-ignore
 			local.airdrops = resJson.airdrops
-			// // @ts-ignore
+			// @ts-ignore
 			local.global = resJson.global
 			return resJson
 		},
