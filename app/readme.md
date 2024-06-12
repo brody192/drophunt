@@ -1,10 +1,5 @@
 # Telegram Mini App
 
-## Deployed
-
-- prod: https://t.me/drophunt_dev_bot/drophunt_app
-- local: https://t.me/drophunt_dev_bot/drophunt
-
 ## Setup
 
 Install [mkcert](https://github.com/FiloSottile/mkcert).
@@ -78,10 +73,6 @@ Then connect to Vercel or somewhere else using these build settings:
 
 ![](docs/images/vercel-settings.png)
 
-## Drophunt Dashboard
-
-Mini app serves to list airdrops + interact with them. To edit airdrops shown and other things, there is [Drophunt Dashboard repo](https://github.com/nikitavoloboev/drophunt-dashboard).
-
-## Note
+## Notes
 
 Built from [Telegram Mini Apps React template](https://github.com/Telegram-Mini-Apps/reactjs-template).

@@ -1,20 +1,20 @@
 {
-	"name": "drophunt",
-	"scripts": {
-		"dev": "cd web && bun dev",
-		"web": "cd web && bun dev",
-		"app": "cd app && bun dev",
-		"api": "cd api && bun dev",
-		"api:deploy": "cd api && bun run deploy",
-		"build": "bun run --filter '*' build",
-		"hono:api": "cd hono && bun dev"
-	},
-	"prettier": {
-		"semi": false,
-		"useTabs": true
-	},
-	"workspaces": [
-		"api",
-		"app"
-	]
+  "name": "drophunt",
+  "scripts": {
+    "dev": "cd web && bun dev",
+    "web": "cd web && bun dev",
+    "app": "cd app && bun dev",
+    "api": "cd api && bun dev",
+    "api:deploy": "cd api && bun run deploy",
+    "build": "bun run --filter '*' build",
+    "hono:api": "cd hono && bun dev"
+  },
+  "prettier": {
+    "semi": false,
+    "useTabs": true
+  },
+  "workspaces": [
+    "api",
+    "app"
+  ]
 }
