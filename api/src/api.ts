@@ -19,7 +19,7 @@ const app = new Elysia()
 			global,
 		}
 	})
-	.listen(8787)
+	.listen(process.env.PORT ?? 8787)
 
 export type App = typeof app
 
