@@ -6,6 +6,7 @@
     "dev": "bun run --watch src/api.ts"
   },
   "dependencies": {
+    "@elysiajs/cors": "^1.0.2",
     "elysia": "^1.0.23",
     "ronin": "^4.0.1"
   },

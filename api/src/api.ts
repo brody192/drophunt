@@ -1,7 +1,9 @@
 import { Elysia } from "elysia"
 import { get } from "ronin"
+import { cors } from "@elysiajs/cors"
 
 const app = new Elysia()
+	.use(cors())
 	.get("/", async () => {
 		const [airdrops, ads, global] = await Promise.all([
 			get.airdrops(),
