@@ -12,6 +12,7 @@
 		"predeploy": "pnpm run build"
 	},
 	"dependencies": {
+		"hono-api": "workspace:hono",
 		"@fontsource-variable/inter": "^5.0.18",
 		"@fontsource/dela-gothic-one": "^5.0.19",
 		"@tanstack/react-query": "^5.40.1",
