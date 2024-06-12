@@ -11,6 +11,14 @@ import { useTonAddress } from "@tonconnect/ui-react"
 import { useEffect } from "react"
 import { proxy } from "valtio"
 import { useProxy } from "valtio/utils"
+import { treaty } from "@elysiajs/eden"
+import { App } from "api/src/api"
+
+const app = treaty<App>(
+	import.meta.env.PROD
+		? "https://drophunt.nikiv.workers.dev"
+		: "http://localhost:8787"
+)
 
 export const HomeRouteState = proxy({
 	activePage: "Airdrops" as "Airdrops" | "Claim" | "Earn" | "OpenedAirdrop",
@@ -40,20 +48,23 @@ export default function HomeRoute() {
 	const { error, data, isFetching } = useQuery({
 		queryKey: ["HomeRoute"],
 		queryFn: async () => {
-			const res = await fetch(`https://drophunt.nikiv.workers.dev/`, {
-				method: "GET",
-				headers: {
-					"Content-Type": "application/json",
-				},
-			})
-			const resJson = await res.json()
-			// @ts-ignore
-			local.ads = resJson.ads
-			// @ts-ignore
-			local.airdrops = resJson.airdrops
-			// @ts-ignore
-			local.global = resJson.global
-			return resJson
+			const { data } = await app.index.get()
+			console.log(data, "data")
+
+			// const res = await fetch(`https://drophunt.nikiv.workers.dev/`, {
+			// 	method: "GET",
+			// 	headers: {
+			// 		"Content-Type": "application/json",
+			// 	},
+			// })
+			// const resJson = await res.json()
+			// // @ts-ignore
+			// local.ads = resJson.ads
+			// // @ts-ignore
+			// local.airdrops = resJson.airdrops
+			// // @ts-ignore
+			// local.global = resJson.global
+			// return resJson
 		},
 	})
 	const walletConnected = useMutation({

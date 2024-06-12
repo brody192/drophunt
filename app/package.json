@@ -8,7 +8,7 @@
 		"build": "tsc --noEmit && vite build"
 	},
 	"dependencies": {
-		"api": "workspace:*",
+		"api": "workspace:api",
 		"@elysiajs/eden": "^1.0.14",
 		"@fontsource-variable/inter": "^5.0.18",
 		"@fontsource/dela-gothic-one": "^5.0.19",
