@@ -8,7 +8,7 @@ import { Ads, Airdrop, Airdrops, Global } from "@ronin/drophunt"
 import { useMutation, useQuery } from "@tanstack/react-query"
 import { useInitData } from "@tma.js/sdk-react"
 import { useTonAddress } from "@tonconnect/ui-react"
-import { AppType } from "api/src/api"
+// import { AppType } from "hono-api/src/api"
 import { hc } from "hono/client"
 import { useEffect } from "react"
 import { proxy } from "valtio"
@@ -38,27 +38,26 @@ export const HomeRouteState = proxy({
 	global: {} as Global,
 })
 
-const client = hc<AppType>(
-	import.meta.env.PROD
-		? `https://drophunt.nikiv.workers.dev`
-		: `http://localhost:8787`
-)
+// const client = hc<AppType>(
+// 	import.meta.env.PROD
+// 		? `https://drophunt.nikiv.workers.dev`
+// 		: `http://localhost:8787`
+// )
 
 export default function HomeRoute() {
 	const local = useProxy(HomeRouteState)
 	const { error, data, isFetching } = useQuery({
-		queryKey: ["global"],
+		queryKey: ["HomeRouteState"],
 		queryFn: async () => {
-			const response = await client.index.$get()
-			const resJson = await response.json()
-			// TODO: ask ronin why types are off
-			// @ts-ignore
-			local.ads = resJson.ads
-			// @ts-ignore
-			local.airdrops = resJson.airdrops
-			// @ts-ignore
-			local.global = resJson.global
-			return resJson
+			// const response = await client.index.$get()
+			// const resJson = await response.json()
+			// // @ts-ignore
+			// local.ads = resJson.ads
+			// // @ts-ignore
+			// local.airdrops = resJson.airdrops
+			// // @ts-ignore
+			// local.global = resJson.global
+			// return resJson
 		},
 	})
 	console.log(import.meta.env.VITE_API_TOKEN, "token!")
