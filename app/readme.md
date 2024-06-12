@@ -47,31 +47,25 @@ bun i
 
 Copy the URL: `https://tma.internal:5173/` and give it to BotFather.
 
-Start the mini app and changes will reflect in the mini app.
+Then in root `.env`, add:
+
+```
+LOCAL=true
+```
+
+Then:
+
+```
+bun app
+```
+
+Start the mini app and changes will reflect in the mini app as you edit them.
 
 ## Deploy
 
-Comment out these lines in [vite.config.ts](vite.config.ts):
+Connect to Vercel using these settings:
 
-```
-https: {
-  cert: readFileSync(resolve("certificates/tma.internal.pem")),
-  key: readFileSync(resolve("certificates/tma.internal-key.pem")),
-},
-```
-
-Uncomment these lines:
-
-```
-// basicSsl({
-// 	certDir: resolve("certificates"),
-// 	domains: ["tma.internal"],
-// }),
-```
-
-Then connect to Vercel or somewhere else using these build settings:
-
-![](docs/images/vercel-settings.png)
+![](docs/images/vercel.png)
 
 ## Notes
 

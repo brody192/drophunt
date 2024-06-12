@@ -1,12 +1,12 @@
 import { resolve } from "node:path"
 import { defineConfig } from "vite"
 import tsconfigPaths from "vite-tsconfig-paths"
-// import react from "@vitejs/plugin-react-swc"
 import basicSsl from "@vitejs/plugin-basic-ssl"
 import { readFileSync } from "node:fs"
 import react from "@vitejs/plugin-react"
 
-const local = process.env.local === "true"
+const local = process.env.LOCAL === "true"
+console.log(local, "local")
 
 // https://vitejs.dev/config/
 export default defineConfig({
