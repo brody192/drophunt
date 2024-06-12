@@ -50,6 +50,7 @@ export default function HomeRoute() {
 		queryFn: async () => {
 			const { data } = await app.index.get()
 			console.log(data, "data")
+			return data
 
 			// const res = await fetch(`https://drophunt.nikiv.workers.dev/`, {
 			// 	method: "GET",
