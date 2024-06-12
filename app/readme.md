@@ -42,7 +42,7 @@ Then follow instructions.
 Install dependencies:
 
 ```
-pnpm i
+bun i
 ```
 
 Copy the URL: `https://tma.internal:5173/` and give it to BotFather.
